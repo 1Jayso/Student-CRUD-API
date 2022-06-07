@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+#  Database********************************
+  postgres:
+    image: postgres:13
+    networks:
+      - testenvnet
+    container_name: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+#      - POSTGRES_HOST_AUTH_METHOD=trust
+#      - POSTGRESQL_ADMIN_PASSWORD=postgres
+      - POSTGRES_DB=student
+    restart: unless-stopped
+
+
+  # APP*****************************************
+  studentAPI:
+    image: studentapp:0.0.1
+    build:
+      context: .
+    networks:
+      - testenvnet
+    container_name: studentAPI
+    volumes:
+    - app-data:/app/student
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    links:
+      - postgres
+
+networks:
+  testenvnet:
+    driver: "bridge"
+
+volumes:
+  postgres-data:
+    name: postgres-data
+
+  app-data:
+    name: app-data

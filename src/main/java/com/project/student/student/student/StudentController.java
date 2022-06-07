@@ -23,6 +23,7 @@ public class StudentController {
         return studentService.getStudent();
 
     }
+    @RequestMapping(path = "/register")
     @PostMapping
     public void registerNewStudent(@RequestBody Student student){
         studentService.addNewStudent(student);
