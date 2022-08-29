@@ -23,6 +23,8 @@ public class StudentController {
         return studentService.getStudent();
 
     }
+
+
     @PostMapping
     public void registerNewStudent(@RequestBody Student student){
         studentService.addNewStudent(student);
@@ -30,7 +32,6 @@ public class StudentController {
 
     @DeleteMapping(path = "{StudentId}")
     public void deleteStudent(@PathVariable("StudentId") Long s){
-
         studentService.removeStudent(s);
     }
 

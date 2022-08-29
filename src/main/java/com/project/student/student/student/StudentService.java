@@ -43,8 +43,9 @@ public class StudentService {
 
         studentRepository.deleteById(id);
         System.out.println("Student has been deleted successfully ");
-
     }
+
+
 //    Check if a student exists and update a student
     @Transactional
     public void update(Long id, String name, String email) {
