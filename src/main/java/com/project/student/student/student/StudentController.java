@@ -25,6 +25,8 @@ public class StudentController {
     }
 
 
+    @RequestMapping(path = "/register")
+
     @PostMapping
     public void registerNewStudent(@RequestBody Student student){
         studentService.addNewStudent(student);
@@ -42,6 +44,7 @@ public class StudentController {
                               @RequestParam(required = false) String email){
         studentService.update(id, name , email);
     }
+
 
     @GetMapping(path = "{studentId}")
     public Student fetchAStudent(@PathVariable("studentId") Long id){
